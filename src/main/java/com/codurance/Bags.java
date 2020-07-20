@@ -5,13 +5,14 @@ import java.util.List;
 
 public class Bags {
 
-  private final List<String> backpack = new ArrayList<>();
+  private final List<Item> backpack = new ArrayList<>();
 
-  public void addToBackpack(String item) {
+  public void addToBackpack(Item item) {
     backpack.add(item);
   }
 
-  public List<String> getBackpack() {
+  public List<Item> getBackpack() {
     return backpack;
   }
+
 }
