@@ -1,6 +1,5 @@
 package com.codurance;
 
 enum Category {
-  METAL, HERB, CLOTHES
-
+  METAL, HERB, WEAPON, CLOTHES
 }

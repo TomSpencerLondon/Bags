@@ -1,28 +1,47 @@
 package com.codurance;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
 
 public class Bags {
 
   private final List<Item> backpack = new ArrayList<>();
-  private List<Item> herbBag = new ArrayList<>();
+  private final List<Item> herbBag = new ArrayList<>();
+  private final List<Item> clothesBag = new ArrayList<>();
+  private final List<Item> weaponBag = new ArrayList<>();
+  private final List<Item> metalBag = new ArrayList<>();
 
-  public void addToBackpack(Item item) {
+  public void add(Item item) {
     if (backpack.size() < 8) {
       backpack.add(item);
     } else {
-      herbBag.add(item);
+      switch (item.getCategory()){
+        case CLOTHES -> clothesBag.add(item);
+        case METAL -> metalBag.add(item);
+        case HERB -> herbBag.add(item);
+        case WEAPON -> weaponBag.add(item);
+      }
     }
-
   }
 
   public List<Item> getBackpack() {
-    return backpack;
+    return List.copyOf(backpack);
   }
 
-  public Collection<Item> getHerbBag() {
-    return herbBag;
+  public List<Item> getHerbBag() {
+    return List.copyOf(herbBag);
+  }
+
+  public List<Item> getClothesBag() {
+    return List.copyOf(clothesBag);
+  }
+
+  public List<Object> getMetalBag() {
+    return List.copyOf(metalBag);
+  }
+
+  public List<Object> getWeaponBag() {
+    return List.copyOf(weaponBag);
   }
 }
