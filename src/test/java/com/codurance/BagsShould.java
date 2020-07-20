@@ -38,6 +38,13 @@ public class BagsShould {
     assertEquals(1, bags.getHerbBag().size());
   }
 
+  @Test
+  void sorts_items_in_the_backpack() {
+    fillBackpack();
+    bags.organise();
+    assertEquals("Copper", bags.getBackpack().get(0).getName());
+  }
+
   private void fillBackpack() {
     bags.add(new Item("Leather", Category.CLOTHES));
     bags.add(new Item("Iron", Category.HERB));
@@ -46,6 +53,6 @@ public class BagsShould {
     bags.add(new Item("Wool", Category.HERB));
     bags.add(new Item("Gold", Category.METAL));
     bags.add(new Item("Silk", Category.CLOTHES));
-    bags.add(new Item("Copper", Category.METAL));
+    bags.add(new Item("Sword", Category.WEAPON));
   }
 }

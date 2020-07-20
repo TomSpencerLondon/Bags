@@ -1,12 +1,14 @@
 package com.codurance;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.params.ParameterizedTest;
 
 public class Bags {
 
-  private final List<Item> backpack = new ArrayList<>();
+  private List<Item> backpack = new ArrayList<>();
   private final List<Item> herbBag = new ArrayList<>();
   private final List<Item> clothesBag = new ArrayList<>();
   private final List<Item> weaponBag = new ArrayList<>();
@@ -43,5 +45,11 @@ public class Bags {
 
   public List<Object> getWeaponBag() {
     return List.copyOf(weaponBag);
+  }
+
+  public void organise(){
+    backpack = backpack.stream()
+            .sorted(Comparator.comparing(Item::getName))
+            .collect(Collectors.toList());
   }
 }
