@@ -1,55 +1,58 @@
 package com.codurance;
 
+import static com.codurance.Category.BACKPACK;
+import static com.codurance.Category.CLOTHES;
+import static com.codurance.Category.HERB;
+import static com.codurance.Category.METAL;
+import static com.codurance.Category.WEAPON;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.junit.jupiter.params.ParameterizedTest;
+import java.util.Map;
 
 public class Bags {
+  Map<Category, List<Item>> bags = new EnumMap<>(Category.class);
 
-  private List<Item> backpack = new ArrayList<>();
-  private final List<Item> herbBag = new ArrayList<>();
-  private final List<Item> clothesBag = new ArrayList<>();
-  private final List<Item> weaponBag = new ArrayList<>();
-  private final List<Item> metalBag = new ArrayList<>();
+  public Bags() {
+    bags.put(BACKPACK, new ArrayList<>());
+    bags.put(CLOTHES, new ArrayList<>());
+    bags.put(METAL, new ArrayList<>());
+    bags.put(HERB, new ArrayList<>());
+    bags.put(WEAPON, new ArrayList<>());
+  }
 
   public void add(Item item) {
-    if (backpack.size() < 8) {
-      backpack.add(item);
+    if (bags.get(BACKPACK).size() < 8) {
+      bags.get(BACKPACK).add(item);
     } else {
-      switch (item.getCategory()){
-        case CLOTHES -> clothesBag.add(item);
-        case METAL -> metalBag.add(item);
-        case HERB -> herbBag.add(item);
-        case WEAPON -> weaponBag.add(item);
-      }
+      bags.get(item.getCategory()).add(item);
     }
   }
 
   public List<Item> getBackpack() {
-    return List.copyOf(backpack);
+    return List.copyOf(bags.get(BACKPACK));
   }
 
   public List<Item> getHerbBag() {
-    return List.copyOf(herbBag);
+    return List.copyOf(bags.get(HERB));
   }
 
   public List<Item> getClothesBag() {
-    return List.copyOf(clothesBag);
+    return List.copyOf(bags.get(CLOTHES));
   }
 
   public List<Object> getMetalBag() {
-    return List.copyOf(metalBag);
+    return List.copyOf(bags.get(METAL));
   }
 
   public List<Object> getWeaponBag() {
-    return List.copyOf(weaponBag);
+    return List.copyOf(bags.get(WEAPON));
   }
 
   public void organise(){
-    backpack = backpack.stream()
-            .sorted(Comparator.comparing(Item::getName))
-            .collect(Collectors.toList());
+    bags.values().forEach(a -> Collections.sort(a, Comparator.comparing(Item::getName)));
   }
 }
