@@ -43,6 +43,7 @@ public class BagsShould {
     fillBackpack();
     bags.organise();
     assertEquals("Copper", bags.getBackpack().get(0).getName());
+    assertEquals("Wool", bags.getBackpack().get(7).getName());
   }
 
   private void fillBackpack() {
